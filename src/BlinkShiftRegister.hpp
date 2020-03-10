@@ -22,8 +22,15 @@
 */
 
 template <uint8_t numberOfShiftRegisters>
-BlinkShiftRegister<numberOfShiftRegisters>::BlinkShiftRegister(ShiftRegister74HC595<numberOfShiftRegisters> *shiftRegister, unsigned int pin, unsigned int delay) :
-    BlinkBase(batteryMin, batteryMax),
+BlinkShiftRegister<numberOfShiftRegisters>::BlinkShiftRegister(ShiftRegister74HC595<numberOfShiftRegisters>* shiftRegister, unsigned int pin, unsigned int delay) :
+    BlinkBase(pin, delay),
+    _shiftRegister(shiftRegister)
+{
+}
+
+template <uint8_t numberOfShiftRegisters>
+BlinkShiftRegister<numberOfShiftRegisters>::BlinkShiftRegister(ShiftRegister74HC595<numberOfShiftRegisters>* shiftRegister, unsigned int pin, unsigned int delays[], unsigned int numberOfDelays) :
+    BlinkBase(pin, delays, numberOfDelays),
     _shiftRegister(shiftRegister)
 {
 }

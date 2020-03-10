@@ -53,48 +53,45 @@
 class BlinkBase
 {
 	// Constructors.
-	public:
+	protected:
 		// Constructor.
 		BlinkBase(unsigned int pin, unsigned int delay);
+		BlinkBase(unsigned int pin, unsigned int delays[], unsigned int numberOfDelays);
 
+	public:
 		// Default destructor.
 		~BlinkBase();
 
 
-	// Setup functions.  Create your instance and run these functions in your "setup" routine.
 	public:
-		// Final initialization.
+		// Initialization.  Run this functions in your "setup" routine.
 		void begin();
 
-
-	// Optional settings.
-	public:
-		// Loop functions.  Run these functions in your "loop" routine.
-	public:
-		// Entry point to the battery meter.  Checks for any state changes and updates accordingly.
+		//  Loop function.  Run this in your "loop" routine.
 		void update();
 
-		// Helper functions for the derived classes.
+
+	// Helper functions for the derived classes.  The user does not need to worry about these.
 	protected:
+		// Returns the current level (HIGH or LOW) to use for setting the pin.
 		uint8_t getActiveLevel();
 
-		// Protected debugging functions.  Used by the derived classes.
-	protected:
-	#ifdef BLINKDEBUG
 
+	// Debugging functions.  Only used if the debug preprocessor definition is declared (see comments at top of file).
+	protected:
+		#ifdef BLINKDEBUG
 		// Print the state of a pin.
 		void printPinState(int pin, bool on);
+		#endif
 
-	#endif
-
-		// Private functions.  The user need not worry about these.
+	// Private functions.  The user need not worry about these.
 	private:
 		// Do the work.  Each derived class must implement its own behavior.
 		virtual void updateBlink() = 0;
 
 
-		// Members / variables.
-		// The underscore denotes a variable that belongs to the class (not a local variable).
+	// Members / variables.
+	// The underscore denotes a variable that belongs to the class (not a local variable).
 	protected:
 		// Output pins.
 		unsigned int*	_pins;

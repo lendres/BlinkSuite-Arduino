@@ -43,7 +43,8 @@ class BlinkShiftRegister : public BlinkBase
 	// Constructors.
 	public:
 		// Constructor.
-		BlinkShiftRegister(ShiftRegister74HC595<numberOfShiftRegisters> *shiftRegister, unsigned int pin, unsigned int delay);
+		BlinkShiftRegister(ShiftRegister74HC595<numberOfShiftRegisters>* shiftRegister, unsigned int pin, unsigned int delay);
+		BlinkShiftRegister(ShiftRegister74HC595<numberOfShiftRegisters>* shiftRegister, unsigned int pin, unsigned int delays[], unsigned int numberOfDelays);
 
 		// Default destructor.
 		~BlinkShiftRegister();
@@ -56,7 +57,7 @@ class BlinkShiftRegister : public BlinkBase
 		// Members / variables.
 		// The underscore denotes a variable that belongs to the class (not a local variable).
 	private:
-		ShiftRegister74HC595<numberOfShiftRegisters> *_shiftRegister;
+		ShiftRegister74HC595<numberOfShiftRegisters>*		_shiftRegister;
 };
 
 // Definitions are stored in another file, so we have to include it here.  This allows us to separate the interface

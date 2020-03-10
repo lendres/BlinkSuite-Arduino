@@ -27,11 +27,28 @@ BlinkBase::BlinkBase(unsigned int pin, unsigned int delay) :
 	_pins(new unsigned int[1]{pin}),
 	_numberOfPins(1),
 	_delays(new unsigned int[1]{delay}),
+	_numberOfDelays(1),
 	_currentDelay(0),
 	_startLevel(LOW),
 	_secondLevel(HIGH),
 	_on(false)
 {
+}
+
+BlinkBase::BlinkBase(unsigned int pin, unsigned int delays[], unsigned int numberOfDelays) :
+	_pins(new unsigned int[1]{pin}),
+	_numberOfPins(1),
+	_delays(new unsigned int[numberOfDelays]),
+	_numberOfDelays(numberOfDelays),
+	_currentDelay(0),
+	_startLevel(LOW),
+	_secondLevel(HIGH),
+	_on(false)
+{
+	for (int i = 0; i < _numberOfDelays; i++)
+	{
+		_delays[i] = delays[i];
+	}	
 }
 
 BlinkBase::~BlinkBase()

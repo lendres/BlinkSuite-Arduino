@@ -28,6 +28,11 @@ BlinkPin::BlinkPin(unsigned int pin, unsigned int delay) :
 {
 }
 
+BlinkPin::BlinkPin(unsigned int pin, unsigned int delays[], unsigned int numberOfDelays) :
+	BlinkBase(pin, delays, numberOfDelays)
+{
+}
+
 BlinkPin::~BlinkPin()
 {
 }
