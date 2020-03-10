@@ -56,18 +56,18 @@ void BlinkBase::begin()
 
 	_updateTimer.setTimeOutTime(_delays[0]);
 
-// We are debugging, print info.
-#ifdef BLINKDEBUG
-	Serial.print("[BlinkBase] Pins:");
-	for (int i = 0; i < _numberOfPins; i++)
-	{
-		Serial.print(" ");
-		Serial.print(_pins[i]);
-	}
+	// We are debugging, print info.
+	#ifdef BLINKDEBUG
+		Serial.print("[BlinkBase] Pins:");
+		for (int i = 0; i < _numberOfPins; i++)
+		{
+			Serial.print(" ");
+			Serial.print(_pins[i]);
+		}
 
-	// Print end of line since we don't return after printing the pins above.
-	Serial.println("");
-#endif
+		// Print end of line since we don't return after printing the pins above.
+		Serial.println("");
+	#endif
 }
 
 void BlinkBase::update()

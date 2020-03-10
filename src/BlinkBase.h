@@ -97,26 +97,26 @@ class BlinkBase
 		// The underscore denotes a variable that belongs to the class (not a local variable).
 	protected:
 		// Output pins.
-		unsigned int *_pins;
-		unsigned int _numberOfPins;
+		unsigned int*	_pins;
+		unsigned int	_numberOfPins;
 
 		// Delays.
-		unsigned int *_delays;
-		unsigned int _numberOfDelays;
-		unsigned int _currentDelay;
+		unsigned int*	_delays;
+		unsigned int 	_numberOfDelays;
+		unsigned int 	_currentDelay;
 
 		// Initialization level for pins.  Pins are set to this value in "begin" and then after
 		// the first time interval is completed, the pin is set to the opposite.
-		uint8_t _startLevel;
-		uint8_t _secondLevel;
+		uint8_t			_startLevel;
+		uint8_t			_secondLevel;
 
 
 	private:
 		// Used to remember the state.
-		bool _on;
+		bool 			_on;
 
 		// Timer.
-		SoftTimer _updateTimer;
+		SoftTimer 		_updateTimer;
 };
 
 #endif
