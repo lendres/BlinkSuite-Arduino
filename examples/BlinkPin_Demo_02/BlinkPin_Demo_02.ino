@@ -8,11 +8,7 @@
 int pinToBlink   			= 7;
 
 // The numberOfDelays must be set to the number of entries in blinkDelays.  Set the
-// delays to your desired length.
-//int numberOfDelays			= 2;
-//unsigned int blinkDelys[] 	= {200, 1500};
-
-int numberOfDelays      = 6;
+int numberOfDelays      	= 6;
 unsigned int blinkDelys[] 	= {200, 200, 200, 200, 1500, 200};
 
 // EXAMPLE STARTS HERE
@@ -28,5 +24,5 @@ void setup()
 
 void loop()
 {
-  blinker.update();
+	blinker.update();
 }

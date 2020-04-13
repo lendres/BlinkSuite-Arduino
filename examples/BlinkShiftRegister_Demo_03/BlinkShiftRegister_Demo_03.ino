@@ -11,12 +11,12 @@
 int pinToBlink   	= 7;
 
 // Shift register pins.
-int dataPin   = 2; 
-int clockPin  = 3;
-int latchPin  = 4;
+int dataPin   		= 2; 
+int clockPin 	 	= 3;
+int latchPin 	 	= 4;
 
 // Set these items to your desired values.
-int blinkDely		= 500;
+int blinkDely		= 400;
 
 // EXAMPLE STARTS HERE
 // Now we use all the items from the configuration section to build and run the example.
@@ -28,8 +28,12 @@ BlinkShiftRegister<1> blinker(&shiftRegister, pinToBlink, blinkDely);
 void setup()
 {
 	Serial.begin(9600);
-  	
 	blinker.begin();
+
+	blinker.setPins(HIGH);
+	delay(2500);
+	blinker.setPins(LOW);
+	delay(2500);
 }
 
 void loop()

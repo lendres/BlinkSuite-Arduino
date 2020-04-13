@@ -1,7 +1,7 @@
 #include "BlinkPin.h"
 
 // DESCRIPTION
-// This example shows the blinks a pin with differents length of time for the on and off states.
+// This example shows how to use the manual on/off feature of the BlinkPin class.
 
 // CONFIGURATION
 // These items should be set to the values according to how you set your Arduino up.
@@ -30,5 +30,5 @@ void setup()
 
 void loop()
 {
-  blinker.update();
+	blinker.update();
 }
