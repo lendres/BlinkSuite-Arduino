@@ -37,12 +37,40 @@ BlinkPin::~BlinkPin()
 {
 }
 
-void BlinkPin::updateBlink()
+void BlinkPin::begin()
+{
+	// If we are debugging, print info.
+	#ifdef BLINKDEBUG
+		Serial.println("[Blink] Setting pin modes.");
+	#endif
+
+	for (unsigned int i = 0; i < _numberOfPins; i++)
+	{
+		pinMode(_pins[i], OUTPUT);
+		digitalWrite(_pins[i], _startLevel);
+	}
+
+	BlinkBase::begin();
+}
+
+void BlinkPin::setPins(uint8_t level)
+{
+	for (unsigned int i = 0; i < _numberOfPins; i++)
+	{
+		digitalWrite(_pins[i], level);
+	}	
+}
+
+void BlinkPin::updatePins()
 {
 	uint8_t level = getActiveLevel();
 
-	for (int i = 0; i < _numberOfPins; i++)
+	for (unsigned int i = 0; i < _numberOfPins; i++)
 	{
+		#ifdef BLINKDEBUG
+			// Print the state of a pin.
+			printPinState(i, level);
+		#endif
 		digitalWrite(_pins[i], level);
 	}
 }

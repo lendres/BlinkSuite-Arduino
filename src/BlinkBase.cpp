@@ -29,8 +29,8 @@ BlinkBase::BlinkBase(unsigned int pin, unsigned int delay) :
 	_delays(new unsigned int[1]{delay}),
 	_numberOfDelays(1),
 	_currentDelay(0),
-	_startLevel(LOW),
-	_secondLevel(HIGH),
+	_startLevel(HIGH),
+	_secondLevel(LOW),
 	_on(false)
 {
 }
@@ -41,11 +41,11 @@ BlinkBase::BlinkBase(unsigned int pin, unsigned int delays[], unsigned int numbe
 	_delays(new unsigned int[numberOfDelays]),
 	_numberOfDelays(numberOfDelays),
 	_currentDelay(0),
-	_startLevel(LOW),
-	_secondLevel(HIGH),
+	_startLevel(HIGH),
+	_secondLevel(LOW),
 	_on(false)
 {
-	for (int i = 0; i < _numberOfDelays; i++)
+	for (unsigned int i = 0; i < _numberOfDelays; i++)
 	{
 		_delays[i] = delays[i];
 	}	
@@ -66,20 +66,24 @@ BlinkBase::~BlinkBase()
 
 void BlinkBase::begin()
 {
-	for (int i = 0; i < _numberOfPins; i++)
-	{
-		digitalWrite(_pins[i], _startLevel);
-	}
-
 	_updateTimer.setTimeOutTime(_delays[0]);
+	_updateTimer.reset();
 
-	// We are debugging, print info.
+	// If we are debugging, print info.
 	#ifdef BLINKDEBUG
-		Serial.print("[BlinkBase] Pins:");
-		for (int i = 0; i < _numberOfPins; i++)
+		Serial.print("[Blink] Pins:");
+		for (unsigned int i = 0; i < _numberOfPins; i++)
 		{
 			Serial.print(" ");
 			Serial.print(_pins[i]);
+		}
+
+		Serial.println("");
+		Serial.print("[Blink] Delays:");
+		for (unsigned int i = 0; i < _numberOfDelays; i++)
+		{
+			Serial.print(" ");
+			Serial.print(_delays[i]);
 		}
 
 		// Print end of line since we don't return after printing the pins above.
@@ -93,7 +97,7 @@ void BlinkBase::update()
 	{
 		_on = !_on;
 
-		updateBlink();
+		updatePins();
 
 		// Increment the delay index and reset if we are at the end.
 		_currentDelay++;
@@ -102,7 +106,16 @@ void BlinkBase::update()
 			_currentDelay = 0;
 		}
 
+		#ifdef BLINKDEBUG
+			Serial.print("[Blink] Delay Number: ");
+			Serial.println(_currentDelay);
+
+			Serial.print("[Blink] Delay Value: ");
+			Serial.println(_delays[_currentDelay]);
+		#endif
+
 		_updateTimer.setTimeOutTime(_delays[_currentDelay]);
+		_updateTimer.reset();
 	}
 }
 
@@ -112,20 +125,11 @@ uint8_t BlinkBase::getActiveLevel()
 }
 
 #ifdef BLINKDEBUG
-void BlinkBase::printPinState(int pin, bool on)
+void BlinkBase::printPinState(int pin, uint8_t level)
 {
-	Serial.print("[BlinkBase] Level: ");
-	Serial.print(pin + 1);
-	Serial.print("    Pin: ");
+	Serial.print("[Blink] Pin: ");
 	Serial.print(_pins[pin]);
-	Serial.print("    ");
-	if (on)
-	{
-		Serial.println("On");
-	}
-	else
-	{
-		Serial.println("Off");
-	}
+	Serial.print("    Level: ");
+	Serial.println(level);
 }
 #endif

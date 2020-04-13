@@ -41,12 +41,28 @@ BlinkShiftRegister<numberOfShiftRegisters>::~BlinkShiftRegister()
 }
 
 template <uint8_t numberOfShiftRegisters>
-void BlinkShiftRegister<numberOfShiftRegisters>::updateBlink()
+void BlinkShiftRegister<numberOfShiftRegisters>::setPins(uint8_t level)
+{
+	for (unsigned int i = 0; i < _numberOfPins; i++)
+	{
+		_shiftRegister->setNoUpdate(_pins[i], level);
+	}
+
+	// Now that all the bit values are set for the lights, activate them.
+	_shiftRegister->updateRegisters();
+}
+
+template <uint8_t numberOfShiftRegisters>
+void BlinkShiftRegister<numberOfShiftRegisters>::updatePins()
 {
 	uint8_t level = getActiveLevel();
 
-	for (int i = 0; i < _numberOfPins; i++)
+	for (unsigned int i = 0; i < _numberOfPins; i++)
 	{
+		#ifdef BLINKDEBUG
+			// Print the state of a pin.
+			printPinState(i, level);
+		#endif
 		_shiftRegister->setNoUpdate(_pins[i], level);
 	}
 

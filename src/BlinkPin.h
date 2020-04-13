@@ -47,12 +47,16 @@ class BlinkPin : public BlinkBase
 		// Default destructor.
 		~BlinkPin();
 
-		// Setup functions.  Create your instance and run these functions in your "setup" routine.
 	public:
-		// Private functions.  The user need not worry about these.
+		// Initialization.  Run this functions in your "setup" routine.
+		void begin();
+
+		// Manual control of pins.
+		void setPins(uint8_t level);
+   
 	private:
 		// Do the work.  Each derived class must implement its own behavior.
-		virtual void updateBlink();
+		virtual void updatePins();
 
 		// Members / variables.
 		// The underscore denotes a variable that belongs to the class (not a local variable).

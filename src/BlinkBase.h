@@ -39,13 +39,14 @@
 
 /*
 	If you want debugging messages printed to the serial monitor, enable the serial monitor and
-	use the following line in your file:
-	
+	uncomment the line:
 	#define BLINKDEBUG
 */
 
 #ifndef BLINKBASE_H
 #define BLINKBASE_H
+
+#define BLINKDEBUG
 
 #include <Arduino.h>
 #include "SoftTimers.h"
@@ -62,33 +63,32 @@ class BlinkBase
 		// Default destructor.
 		~BlinkBase();
 
-
 	public:
 		// Initialization.  Run this functions in your "setup" routine.
-		void begin();
+		virtual void begin();
 
 		//  Loop function.  Run this in your "loop" routine.
 		void update();
 
+		// Manual control of pins.
+		virtual void setPins(uint8_t level) = 0;
 
 	// Helper functions for the derived classes.  The user does not need to worry about these.
 	protected:
 		// Returns the current level (HIGH or LOW) to use for setting the pin.
 		uint8_t getActiveLevel();
 
-
 	// Debugging functions.  Only used if the debug preprocessor definition is declared (see comments at top of file).
 	protected:
 		#ifdef BLINKDEBUG
 		// Print the state of a pin.
-		void printPinState(int pin, bool on);
+		void printPinState(int pin, uint8_t level);
 		#endif
 
 	// Private functions.  The user need not worry about these.
 	private:
 		// Do the work.  Each derived class must implement its own behavior.
-		virtual void updateBlink() = 0;
-
+		virtual void updatePins() = 0;
 
 	// Members / variables.
 	// The underscore denotes a variable that belongs to the class (not a local variable).
@@ -106,7 +106,6 @@ class BlinkBase
 		// the first time interval is completed, the pin is set to the opposite.
 		uint8_t			_startLevel;
 		uint8_t			_secondLevel;
-
 
 	private:
 		// Used to remember the state.

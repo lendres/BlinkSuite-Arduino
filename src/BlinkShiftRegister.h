@@ -49,10 +49,14 @@ class BlinkShiftRegister : public BlinkBase
 		// Default destructor.
 		~BlinkShiftRegister();
 
-		// Private functions.  The user need not worry about these.
+	public:
+		// Manual control of pins.
+		void setPins(uint8_t level);
+
+	// Private functions.  The user need not worry about these.
 	private:
 		// Do the work.  Each derived class must implement its own behavior.
-		virtual void updateBlink();
+		virtual void updatePins();
 
 		// Members / variables.
 		// The underscore denotes a variable that belongs to the class (not a local variable).
