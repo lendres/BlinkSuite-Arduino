@@ -19,7 +19,7 @@ https://github.com/lendres/BlinkSuite-Arduino
 
 This library requires the following librarys to run:
 
-* [SoftTimers](https://github.com/end2endzone/SoftTimers) - Time libary by Antoine Beauchamp
+* [SoftTimers](https://github.com/end2endzone/SoftTimers) - Timing libary by Antoine Beauchamp
 
 * [ShiftRegister74HC595](https://timodenk.com/blog/shift-register-arduino-library/) - ShiftRegister74HC595 Arduino Library
 
