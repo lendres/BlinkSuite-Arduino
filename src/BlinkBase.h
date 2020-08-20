@@ -35,6 +35,10 @@
 		- Be careful to get the right library, there are several timer libraries and even more than one "SoftTimer" library.
 		- Can be installed from Arduino IDE Library Manager.
 		- https://github.com/end2endzone/SoftTimers
+
+	ShiftRegister74HC595 by Timo Denk
+		- Can be installed from Arduino IDE Library Manager.
+		- https://shiftregister.simsso.de
 */
 
 /*
